@@ -1,0 +1,126 @@
+.card {
+    background: #FFFFFF;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #F1EBE5;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.imageWrapper {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1.2;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.card:hover .image {
+    transform: scale(1.08);
+}
+
+.badge {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    padding: 6px 12px;
+    background: #3D2B1F;
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 2;
+}
+
+.badge.bestseller {
+    background: #3D2B1F;
+}
+
+.badge.new {
+    background: #FFFFFF;
+    color: #3D2B1F;
+    border: 1px solid #3D2B1F;
+}
+
+.content {
+    padding: var(--space-5);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.topRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-2);
+}
+
+.name {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: #3D2B1F;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.price {
+    font-size: var(--text-md);
+    font-weight: 700;
+    color: #3D2B1F;
+}
+
+.description {
+    font-size: 13px;
+    color: #8A7A6E;
+    line-height: 1.5;
+    margin-bottom: var(--space-4);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box_orient: vertical;
+    overflow: hidden;
+    margin-top: auto;
+}
+
+.addBtn {
+    position: absolute;
+    bottom: var(--space-5);
+    right: var(--space-5);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #3D2B1F;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    box-shadow: 0 4px 10px rgba(61, 43, 31, 0.3);
+}
+
+.addBtn:hover {
+    transform: scale(1.1) rotate(90deg);
+    background: #2C1810;
+}
+
+.addBtn svg {
+    font-size: 20px;
+}

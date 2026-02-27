@@ -1,0 +1,104 @@
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    border: none;
+    border-radius: var(--radius-full);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    white-space: nowrap;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Variants */
+.primary {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: white;
+    box-shadow: 0 4px 15px rgba(212, 163, 115, 0.3);
+}
+
+.primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(212, 163, 115, 0.4);
+}
+
+.secondary {
+    background: var(--color-secondary);
+    color: white;
+}
+
+.secondary:hover:not(:disabled) {
+    background: var(--color-secondary-dark);
+    transform: translateY(-2px);
+}
+
+.outline {
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary-dark);
+}
+
+.outline:hover:not(:disabled) {
+    background: var(--color-primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.ghost {
+    background: transparent;
+    color: var(--color-text-secondary);
+}
+
+.ghost:hover:not(:disabled) {
+    background: var(--color-bg-secondary);
+    color: var(--color-text);
+}
+
+.danger {
+    background: var(--color-error);
+    color: white;
+}
+
+.danger:hover:not(:disabled) {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.accent {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+    color: white;
+    box-shadow: 0 4px 15px rgba(231, 111, 81, 0.3);
+}
+
+.accent:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(231, 111, 81, 0.4);
+}
+
+/* Sizes */
+.sm {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-xs);
+}
+
+.md {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--text-sm);
+}
+
+.lg {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-base);
+}
+
+.fullWidth {
+    width: 100%;
+}

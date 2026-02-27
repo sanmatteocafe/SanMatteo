@@ -1,0 +1,261 @@
+.main {
+    min-height: 100vh;
+    background: #0f0f10;
+    color: #ffffff;
+    padding: 60px 20px;
+    font-family: var(--font-secondary);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 450px;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+@media (max-width: 968px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+/* Card Common Styles */
+.progressCard,
+.timelineCard {
+    background: #18181b;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Left Column */
+.leftCol {
+    text-align: center;
+}
+
+.progressHeader {
+    margin-bottom: 30px;
+}
+
+.label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 700;
+}
+
+.circleWrapper {
+    width: 260px;
+    height: 260px;
+    margin: 0 auto 30px;
+}
+
+.statusInfo {
+    margin-bottom: 40px;
+}
+
+.statusTitle {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-family: var(--font-heading);
+}
+
+.sectionLabel {
+    font-size: 14px;
+    color: #d4af37;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.orderDetails {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.orderMeta {
+    text-align: left;
+}
+
+.orderNum {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.tableNum {
+    display: block;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 4px;
+}
+
+.waitBox {
+    text-align: right;
+}
+
+.waitLabel {
+    display: block;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.waitValue {
+    font-size: 18px;
+    font-weight: 700;
+    color: #d4af37;
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.backLink:hover {
+    color: #d4af37;
+    transform: translateX(-5px);
+}
+
+/* Timeline Card */
+.timelineCard {
+    background: #111111;
+}
+
+.cardTitle {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 40px;
+    color: #ffffff;
+    font-family: var(--font-heading);
+}
+
+.timeline {
+    position: relative;
+    padding-left: 50px;
+}
+
+.timelineLine {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    bottom: 10px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.timelineItem {
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.timelineItem:last-child {
+    margin-bottom: 0;
+}
+
+.timelineDot {
+    position: absolute;
+    left: -48px;
+    top: 4px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 18px;
+    transition: all 0.4s ease;
+}
+
+.timelineItem.active .timelineDot {
+    background: #d4af37;
+    color: #000000;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+}
+
+.timelineItem.completed .timelineDot {
+    background: #d4af37;
+    color: #000000;
+}
+
+.timelineContent h4 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #ffffff;
+}
+
+.timelineItem.active h4 {
+    color: #d4af37;
+}
+
+.timelineContent p {
+    font-size: 14px;
+    color: #b3b3b3;
+    line-height: 1.6;
+}
+
+.currentIndicator {
+    display: table;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 800;
+    margin-top: 12px;
+    padding: 4px 10px;
+    background: rgba(212, 175, 55, 0.1);
+    color: #d4af37;
+    border-radius: 4px;
+}
+
+/* Page Feedback States */
+.loading,
+.error {
+    min-height: 100vh;
+    background: #0f0f10;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.loading h2 {
+    font-size: 24px;
+    color: #d4af37;
+    margin-bottom: 15px;
+}
+
+.error h2 {
+    font-size: 32px;
+    color: #ff4d4d;
+    margin-bottom: 15px;
+}
+
+.error p {
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 30px;
+}

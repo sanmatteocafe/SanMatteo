@@ -1,0 +1,23 @@
+.inputWrapper {
+    position: relative;
+}
+
+.inputWrapper input {
+    padding-left: 42px !important;
+}
+
+.inputIcon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+    font-size: 16px;
+}
+
+.note {
+    margin-top: var(--space-6);
+    text-align: center;
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+}

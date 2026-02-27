@@ -1,0 +1,421 @@
+.filters {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+    background: #FFFFFF;
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    border: 1px solid #F1EBE5;
+}
+
+/* Date Filter UI */
+.filterGroup {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border: 1px solid #F1EBE5;
+}
+
+.adminInstructions {
+    background: #FFFAF2;
+    border: 1px solid #FFE4CC;
+    border-left: 4px solid #6F4E37;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.instructionsText {
+    font-size: 14px;
+    color: #4B3326;
+    line-height: 1.5;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.filterBtn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    background: var(--color-bg-admin-secondary);
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: capitalize;
+    transition: all var(--transition-fast);
+    border: 1px solid transparent;
+}
+
+.filterBtn:hover {
+    border-color: rgba(212, 163, 115, 0.3);
+    color: var(--color-primary);
+}
+
+.filterBtn.active {
+    background: rgba(212, 163, 115, 0.15);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.count {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1px 6px;
+    border-radius: var(--radius-full);
+    font-size: 11px;
+}
+
+.filterGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+    background: #FFFFFF;
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    border: 1px solid #F1EBE5;
+}
+
+.filterLabel {
+    font-size: 11px;
+    font-weight: 800;
+    color: #A89F94;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.dateInputWrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-left: auto;
+}
+
+.dateInput {
+    padding: 6px 12px;
+    border: 1px solid #F1EBE5;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    color: #3D2B1F;
+    outline: none;
+    cursor: pointer;
+}
+
+.dateInput:focus {
+    border-color: #D4A373;
+}
+
+.actionBtn {
+    background: #D4A373;
+    color: #3D2B1F;
+    border: none;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.actionBtn:hover {
+    background: #3D2B1F;
+    color: white;
+}
+
+/* Receipt Styles in Modal */
+.receiptContainer {
+    padding: var(--space-2);
+}
+
+.receiptHeader {
+    text-align: center;
+    padding-bottom: var(--space-6);
+    border-bottom: 2px dashed #F1EBE5;
+    margin-bottom: var(--space-6);
+}
+
+.orderNum {
+    font-size: 14px;
+    font-weight: 800;
+    color: #D4A373;
+    letter-spacing: 1px;
+}
+
+.receiptTime {
+    font-size: 12px;
+    color: #A89F94;
+    margin-top: 4px;
+}
+
+.metaGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+}
+
+.metaItem label {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    color: #8A7A6E;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.metaValue {
+    font-size: 14px;
+    font-weight: 700;
+    color: #3D2B1F;
+}
+
+.itemizedList {
+    margin-bottom: var(--space-8);
+}
+
+.itemRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid #FDFCFB;
+}
+
+.itemNameCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.itemName {
+    font-size: 14px;
+    font-weight: 700;
+    color: #3D2B1F;
+}
+
+.itemQty {
+    font-size: 12px;
+    color: #8A7A6E;
+}
+
+.itemPrice {
+    font-size: 14px;
+    font-weight: 800;
+    color: #3D2B1F;
+}
+
+.receiptTotals {
+    border-top: 2px dashed #F1EBE5;
+    padding-top: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.receiptRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #8A7A6E;
+}
+
+.grandTotalRow {
+    margin-top: var(--space-4);
+    font-size: 20px;
+    font-weight: 800;
+    color: #D4A373;
+    display: flex;
+    justify-content: space-between;
+}
+
+.interactableRow {
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.interactableRow:hover {
+    background: #FDFCFB;
+}
+
+/* Table Status Grid */
+.tableStatusSection {
+    background: #FFFFFF;
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    border: 1px solid #F1EBE5;
+    margin-bottom: var(--space-8);
+}
+
+.tableStatusHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-6);
+}
+
+.tableStatusHeader h3 {
+    font-size: 16px;
+    font-weight: 800;
+    color: #3D2B1F;
+}
+
+.tableStatusLegend {
+    display: flex;
+    gap: var(--space-6);
+}
+
+.legendItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #8A7A6E;
+    font-weight: 600;
+}
+
+.legendDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.legendDot.available {
+    background: #4CAF50;
+}
+
+.legendDot.occupiedDot {
+    background: #C67C4E;
+}
+
+.tableStatusGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--space-4);
+}
+
+.tableStatusCard {
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    text-align: center;
+    transition: all 0.2s ease;
+    border: 1.5px solid transparent;
+}
+
+.tableStatusCard.statusAvailable {
+    background: #F0FFF0;
+    border-color: #C8E6C9;
+}
+
+.tableStatusCard.statusOccupied {
+    background: #FFF8F0;
+    border-color: #F5D5B5;
+    cursor: pointer;
+}
+
+.tableStatusCard.statusOccupied:hover {
+    border-color: #C67C4E;
+    box-shadow: 0 4px 12px rgba(198, 124, 78, 0.15);
+    transform: translateY(-2px);
+}
+
+.tableNum {
+    font-size: 18px;
+    font-weight: 800;
+    color: #3D2B1F;
+    margin-bottom: 4px;
+}
+
+.tableStatusLabel {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.availableBadge {
+    font-size: 10px;
+    font-weight: 700;
+    color: #4CAF50;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.occupiedBadge {
+    font-size: 10px;
+    font-weight: 800;
+    color: #C67C4E;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tableOrderId {
+    font-size: 10px;
+    color: #8A7A6E;
+    font-weight: 600;
+}
+
+.manualDot {
+    background: #7B61FF;
+}
+
+.manualBadge {
+    font-size: 10px;
+    font-weight: 800;
+    color: #7B61FF;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.statusManual {
+    background: #F5F0FF;
+    border-color: #D4C4FF;
+}
+
+.statusManual:hover {
+    border-color: #7B61FF;
+    box-shadow: 0 4px 12px rgba(123, 97, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.toggleBtn {
+    margin-top: 8px;
+    padding: 4px 10px;
+    border: 1.5px solid #C8E6C9;
+    border-radius: 6px;
+    background: #F0FFF0;
+    color: #4CAF50;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.toggleBtn:hover {
+    background: #E8F5E9;
+    border-color: #4CAF50;
+    transform: scale(1.02);
+}
+
+.toggleBtnOccupied {
+    background: #F5F0FF;
+    border-color: #D4C4FF;
+    color: #7B61FF;
+}
+
+.toggleBtnOccupied:hover {
+    background: #EDE7FF;
+    border-color: #7B61FF;
+}
