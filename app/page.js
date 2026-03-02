@@ -104,7 +104,7 @@ function HomeContent() {
               variants={fadeUp}
             >
               <motion.span className={styles.heroBadge} variants={fadeUp} custom={0}>
-                ☕ SAN MATTEEO
+                ☕ SAN MATTEO
               </motion.span>
               <motion.h1 className={styles.heroTitle} variants={fadeUp} custom={1}>
                 Experience Coffee<br />
@@ -134,7 +134,7 @@ function HomeContent() {
                 <div className={styles.heroBlur} />
                 <img
                   src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&h=600&fit=crop"
-                  alt="SAN MATTEEO Coffee"
+                  alt="SAN MATTEO Coffee"
                   className={styles.heroImage}
                 />
               </div>
@@ -265,7 +265,7 @@ function HomeContent() {
           >
             <div className={styles.offerContent}>
               <h2>Get 20% OFF<br />Your First Order</h2>
-              <p>Use code SANMATTEEO20 on your first QR order</p>
+              <p>Use code SANMATTEO20 on your first QR order</p>
               <Link href="/menu" className={styles.offerBtn}>
                 Order Now <FiArrowRight />
               </Link>
@@ -341,7 +341,7 @@ function HomeContent() {
         <footer className={styles.footer}>
           <div className={styles.footerInner}>
             <div className={styles.footerBrand}>
-              <h3>☕ SAN MATTEEO</h3>
+              <h3>☕ SAN MATTEO</h3>
               <p>Crafting perfect moments, one cup at a time. Modern QR-based café ordering for a seamless experience.</p>
             </div>
             <div className={styles.footerLinks}>
@@ -349,18 +349,18 @@ function HomeContent() {
               <Link href="/">Home</Link>
               <Link href="/menu">Menu</Link>
               <Link href="/cart">Cart</Link>
-              <a href="mailto:hello@sanmatteeo.com">Contact</a>
+              <a href="mailto:hello@sanmatteo.com">Contact</a>
             </div>
             <div className={styles.footerSocial}>
               <h4>Connect</h4>
               <a href="#" target="_blank" rel="noopener">Instagram</a>
               <a href="#" target="_blank" rel="noopener">Twitter</a>
               <a href="#" target="_blank" rel="noopener">Facebook</a>
-              <a href="mailto:hello@sanmatteeo.com">Email Us</a>
+              <a href="mailto:hello@sanmatteo.com">Email Us</a>
             </div>
           </div>
           <div className={styles.footerBottom}>
-            <p>© 2025 SAN MATTEEO. All rights reserved.</p>
+            <p>© 2025 SAN MATTEO. All rights reserved.</p>
           </div>
         </footer>
 

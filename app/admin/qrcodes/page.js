@@ -122,7 +122,7 @@ export default function QRManagerPage() {
                 .footer { font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
             </style></head><body>
                 <div class="card">
-                    <div class="brand">SAN MATTEEO</div>
+                    <div class="brand">SAN MATTEO</div>
                     <div class="table">Table ${qr.tableNumber}</div>
                     <img src="${dataUrl}" />
                     <div class="footer">Scan To Order</div>
@@ -140,7 +140,7 @@ export default function QRManagerPage() {
             const dataUrl = canvas ? canvas.toDataURL('image/png') : '';
             return `
                 <div class="card">
-                    <div class="brand">SAN MATTEEO</div>
+                    <div class="brand">SAN MATTEO</div>
                     <div class="table">Table ${qr.tableNumber}</div>
                     <img src="${dataUrl}" />
                     <div class="footer">Scan To Order</div>
@@ -237,7 +237,7 @@ export default function QRManagerPage() {
                                 </div>
                                 <div className={styles.qrContainer}>
                                     <div className={styles.qrBranding}>
-                                        <h4>SAN MATTEEO</h4>
+                                        <h4>SAN MATTEO</h4>
                                     </div>
                                     <QRCodeCanvas
                                         id={`qr-canvas-${qr.tableNumber}`}
@@ -324,7 +324,7 @@ export default function QRManagerPage() {
                         <div className="flex-center" style={{ flexDirection: 'column', gap: '2rem', padding: '2rem' }}>
                             <div className={styles.qrContainer} style={{ width: '100%', padding: '3rem' }}>
                                 <div className={styles.qrBranding} style={{ marginBottom: '1.5rem' }}>
-                                    <h4 style={{ fontSize: '24px' }}>SAN MATTEEO</h4>
+                                    <h4 style={{ fontSize: '24px' }}>SAN MATTEO</h4>
                                 </div>
                                 <QRCodeCanvas
                                     value={`${baseUrl}/?table=${viewingTable.tableNumber}`}

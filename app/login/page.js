@@ -51,8 +51,9 @@ export default function LoginPage() {
             toast.success('Welcome!');
             router.push('/');
         } catch (err) {
+            console.error('Google Sign-In Error:', err);
             if (err.code !== 'auth/popup-closed-by-user') {
-                toast.error('Google sign-in failed');
+                toast.error(`Google sign-in failed: ${err.message || err.code}`);
             }
         }
     };
@@ -193,7 +194,7 @@ export default function LoginPage() {
                 </div>
 
                 <footer className={styles.pageFooter}>
-                    © 2024 SAN MATTEEO. All rights reserved.
+                    © 2024 SAN MATTEO. All rights reserved.
                 </footer>
             </main>
         </>

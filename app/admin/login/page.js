@@ -39,7 +39,7 @@ export default function AdminLoginPage() {
     return (
         <div className="login-page">
             <div className="login-card">
-                <h1>☕ SAN MATTEEO</h1>
+                <h1>☕ SAN MATTEO</h1>
                 <p>Sign in to Admin Panel</p>
 
                 <form onSubmit={handleSubmit}>

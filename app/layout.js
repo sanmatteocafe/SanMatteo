@@ -5,9 +5,13 @@ import { AuthProvider } from '@/lib/AuthContext';
 import { ThemeProvider } from '@/lib/ThemeContext';
 
 export const metadata = {
-  title: 'SAN MATTEEO — QR Cafe Ordering System',
+  title: 'SAN MATTEO — QR Cafe Ordering System',
   description: 'Order your favorite food and drinks with our seamless QR-based cafe ordering system. Browse menu, add to cart, and place orders from your table.',
   keywords: 'cafe, ordering, QR code, food, drinks, restaurant',
+  icons: {
+    icon: '/SanMatteo-logo.jpeg',
+    apple: '/SanMatteo-logo.jpeg',
+  },
 };
 
 export default function RootLayout({ children }) {

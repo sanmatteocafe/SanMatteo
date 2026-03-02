@@ -184,6 +184,47 @@
     border-color: #D4A373;
 }
 
+/* Custom Date Range Inputs */
+.customDateInputs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dateField {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #FFFFFF;
+    border: 1px solid #F1EBE5;
+    border-radius: 10px;
+    padding: 0 12px;
+    height: 38px;
+    color: #A89F94;
+    transition: border-color 0.2s;
+}
+
+.dateField:focus-within {
+    border-color: #D4A373;
+}
+
+.dateInput {
+    border: none;
+    outline: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: #3D2B1F;
+    background: transparent;
+    cursor: pointer;
+}
+
+.dateSeparator {
+    font-size: 12px;
+    font-weight: 600;
+    color: #A89F94;
+}
+
+
 /* Table */
 .tableWrapper {
     background: #FFFFFF;

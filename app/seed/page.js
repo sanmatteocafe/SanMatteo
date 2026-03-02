@@ -33,7 +33,7 @@ const TABLES = [
 ];
 
 const SETTINGS = {
-    cafeName: 'SAN MATTEEO',
+    cafeName: 'SAN MATTEO',
     address: 'Surat',
     phone: '9999999999',
     taxPercent: 5,
@@ -90,7 +90,7 @@ export default function SeedPage() {
             addResult('👤 Adding admin user record...');
             await setDoc(doc(db, 'users', 'admin1'), {
                 name: 'Admin',
-                email: 'admin@sanmatteeo.com',
+                email: 'admin@sanmatteo.com',
                 role: 'admin',
                 createdAt: Timestamp.now(),
             });
@@ -135,7 +135,7 @@ export default function SeedPage() {
             <div style={{ maxWidth: 600, margin: '0 auto' }}>
                 <h1 style={{ fontSize: 28, marginBottom: 8, color: '#D4AF37' }}>🔥 Firebase Database Seeder</h1>
                 <p style={{ color: '#8A8A8A', marginBottom: 32 }}>
-                    Populate your Firestore with sample SAN MATTEEO data
+                    Populate your Firestore with sample SAN MATTEO data
                 </p>
 
                 <div style={{ display: 'flex', gap: 12, marginBottom: 24 }}>

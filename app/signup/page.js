@@ -59,7 +59,7 @@ export default function SignupPage() {
                 <div className={styles.card}>
                     <div className={styles.header}>
                         <h1 className={styles.title}>Create Your Account</h1>
-                        <p className={styles.subtitle}>Join the SAN MATTEEO legacy.</p>
+                        <p className={styles.subtitle}>Join the SAN MATTEO legacy.</p>
                     </div>
 
                     <form onSubmit={handleSignup} className={styles.form}>

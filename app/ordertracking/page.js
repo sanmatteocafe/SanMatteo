@@ -82,7 +82,7 @@ function OrderTrackingContent() {
         { id: 'pending', title: 'Order Received', desc: 'Your order has been sent to the kitchen.', icon: <FiCheck /> },
         { id: 'preparing', title: 'Barista Started', desc: 'Our chef is currently preparing your order with precision.', icon: <FiCoffee /> },
         { id: 'ready', title: 'Ready to Serve', desc: 'Your order is ready and will be served to your table.', icon: <FiTrendingUp /> },
-        { id: 'completed', title: 'Served to Table', desc: 'Order served. Enjoy your meal at San Matteeo!', icon: <FiClock /> },
+        { id: 'completed', title: 'Served to Table', desc: 'Order served. Enjoy your meal at San Matteo!', icon: <FiClock /> },
     ];
 
     const currentStatusIndex = timelineItems.findIndex(item => item.id === order.status);

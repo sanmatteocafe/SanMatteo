@@ -72,7 +72,7 @@ export default function OrderHistoryPage() {
                 <div className={styles.container}>
                     <header className={styles.header}>
                         <h1 className={styles.title}>Order History</h1>
-                        <p className={styles.subtitle}>Your Past Royal Experiences at SAN MATTEEO</p>
+                        <p className={styles.subtitle}>Your Past Royal Experiences at SAN MATTEO</p>
                     </header>
 
                     <div className={styles.tabs}>
@@ -142,7 +142,7 @@ export default function OrderHistoryPage() {
                 </div>
 
                 <footer className={styles.pageFooter}>
-                    © 2024 SAN MATTEEO LUXURY CAFE
+                    © 2024 SAN MATTEO LUXURY CAFE
                 </footer>
             </main>
         </>

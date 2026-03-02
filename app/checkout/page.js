@@ -375,7 +375,7 @@ export default function CheckoutPage() {
                     </div>
 
                     <footer className={styles.footer}>
-                        © 2024 SAN MATTEEO. All rights reserved.
+                        © 2024 SAN MATTEO. All rights reserved.
                     </footer>
                 </div>
             </main>

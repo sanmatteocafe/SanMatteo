@@ -29,9 +29,7 @@
     text-decoration: none;
 }
 
-.logoIcon {
-    font-size: var(--text-2xl);
-}
+.logoImg { border-radius: 8px; object-fit: cover; }
 
 .logoText {
     font-family: var(--font-heading);

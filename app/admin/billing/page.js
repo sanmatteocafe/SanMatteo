@@ -110,7 +110,7 @@ export default function BillingPage() {
             const marginX = 0;
             const marginY = 10;
             pdf.addImage(imgData, 'PNG', marginX, marginY, imgWidth, imgHeight);
-            pdf.save(`SanMatteeo-${selectedBill.orderNumber || selectedBill.id.slice(-6)}.pdf`);
+            pdf.save(`SanMatteo-${selectedBill.orderNumber || selectedBill.id.slice(-6)}.pdf`);
 
             toast.dismiss(loadingToast);
             toast.success('PDF downloaded!');
@@ -256,7 +256,7 @@ export default function BillingPage() {
                             <div className={styles.invoiceWrapper} ref={invoiceRef}>
                                 <div className={styles.invoiceCard}>
                                     <div className={styles.brandLogo}>
-                                        <h3>SAN MATTEEO</h3>
+                                        <h3>SAN MATTEO</h3>
                                         <span>Ultra-Luxury Cafe</span>
                                     </div>
 

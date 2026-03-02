@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useCart } from '@/lib/CartContext';
 import { useAuth } from '@/lib/AuthContext';
@@ -45,8 +46,8 @@ export default function Navbar() {
         <nav className={styles.navbar}>
             <div className={styles.container}>
                 <Link href="/" className={styles.logo}>
-                    <span className={styles.logoIcon}>☕</span>
-                    <span className={styles.logoText}>SAN MATTEEO</span>
+                    <Image src="/SanMatteo-logo.jpeg" alt="San Matteo Cafe" width={40} height={40} className={styles.logoImg} />
+                    <span className={styles.logoText}>SAN MATTEO</span>
                 </Link>
 
                 <div className={`${styles.navLinks} ${menuOpen ? styles.open : ''}`}>

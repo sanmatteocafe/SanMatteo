@@ -5,7 +5,7 @@ import { getOrders } from '@/services/orderService';
 import toast from 'react-hot-toast';
 import {
     FiTrendingUp, FiDollarSign, FiShoppingBag, FiBarChart2,
-    FiDownload, FiSearch, FiChevronLeft, FiChevronRight, FiFilter
+    FiDownload, FiSearch, FiChevronLeft, FiChevronRight, FiFilter, FiCalendar
 } from 'react-icons/fi';
 import {
     Chart as ChartJS,
@@ -31,6 +31,8 @@ export default function AnalyticsPage() {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortField, setSortField] = useState('createdAt');
     const [sortDir, setSortDir] = useState('desc');
+    const [customStart, setCustomStart] = useState('');
+    const [customEnd, setCustomEnd] = useState('');
 
     useEffect(() => {
         const load = async () => {
@@ -52,7 +54,18 @@ export default function AnalyticsPage() {
         let result = [...orders];
 
         // Date range filter
-        if (dateRange !== 'all') {
+        if (dateRange === 'custom') {
+            if (customStart) {
+                const start = new Date(customStart);
+                start.setHours(0, 0, 0, 0);
+                result = result.filter(o => new Date(o.createdAt) >= start);
+            }
+            if (customEnd) {
+                const end = new Date(customEnd);
+                end.setHours(23, 59, 59, 999);
+                result = result.filter(o => new Date(o.createdAt) <= end);
+            }
+        } else if (dateRange !== 'all') {
             const now = new Date();
             let cutoff = new Date();
             if (dateRange === 'today') cutoff.setHours(0, 0, 0, 0);
@@ -95,7 +108,7 @@ export default function AnalyticsPage() {
         });
 
         return result;
-    }, [orders, searchQuery, statusFilter, dateRange, sortField, sortDir]);
+    }, [orders, searchQuery, statusFilter, dateRange, customStart, customEnd, sortField, sortDir]);
 
     // Pagination
     const totalPages = Math.ceil(filteredOrders.length / ROWS_PER_PAGE);
@@ -180,7 +193,7 @@ export default function AnalyticsPage() {
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `SanMatteeo-Orders-${new Date().toISOString().slice(0, 10)}.csv`;
+        link.download = `SanMatteo-Orders-${new Date().toISOString().slice(0, 10)}.csv`;
         link.click();
         URL.revokeObjectURL(url);
         toast.success(`Downloaded ${filteredOrders.length} orders as CSV`);
@@ -315,7 +328,33 @@ export default function AnalyticsPage() {
                             <option value="7days">Last 7 Days</option>
                             <option value="30days">Last 30 Days</option>
                             <option value="90days">Last 90 Days</option>
+                            <option value="custom">Custom Range</option>
                         </select>
+                        {dateRange === 'custom' && (
+                            <div className={styles.customDateInputs}>
+                                <div className={styles.dateField}>
+                                    <FiCalendar />
+                                    <input
+                                        type="date"
+                                        value={customStart}
+                                        onChange={e => { setCustomStart(e.target.value); setCurrentPage(1); }}
+                                        className={styles.dateInput}
+                                        placeholder="Start date"
+                                    />
+                                </div>
+                                <span className={styles.dateSeparator}>to</span>
+                                <div className={styles.dateField}>
+                                    <FiCalendar />
+                                    <input
+                                        type="date"
+                                        value={customEnd}
+                                        onChange={e => { setCustomEnd(e.target.value); setCurrentPage(1); }}
+                                        className={styles.dateInput}
+                                        placeholder="End date"
+                                    />
+                                </div>
+                            </div>
+                        )}
                         <select value={statusFilter} onChange={e => { setStatusFilter(e.target.value); setCurrentPage(1); }}>
                             <option value="all">All Status</option>
                             <option value="pending">Pending</option>

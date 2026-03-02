@@ -46,7 +46,8 @@ export default function Sidebar() {
 
             <aside className={`admin-sidebar ${open ? 'open' : ''}`}>
                 <div className="sidebar-logo">
-                    <h2>☕ SAN MATTEEO</h2>
+                    <img src="/SanMatteo-logo.jpeg" alt="San Matteo Cafe" style={{ width: '40px', height: '40px', borderRadius: '8px', objectFit: 'cover' }} />
+                    <h2>SAN MATTEO</h2>
                     <span>Admin Panel</span>
                 </div>
 

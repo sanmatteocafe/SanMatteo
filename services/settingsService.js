@@ -4,7 +4,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 const DOC_PATH = 'settings/cafe';
 
 const defaultSettings = {
-    cafeName: 'SAN MATTEEO',
+    cafeName: 'SAN MATTEO',
     address: 'Surat',
     phone: '9999999999',
     taxPercent: 5,
