@@ -1,15 +1,24 @@
 'use client';
+import { useState } from 'react';
 import { useCart } from '@/lib/CartContext';
-import { FiPlus, FiShoppingCart } from 'react-icons/fi';
+import { FiPlus } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import styles from './MenuCard.module.css';
 
 export default function MenuCard({ item }) {
     const { addItem } = useCart();
+    const [variant, setVariant] = useState('hot');
 
     const handleAdd = () => {
-        addItem(item);
-        toast.success(`${item.name} added to cart!`, {
+        const cartItem = {
+            ...item,
+            // If item has variants, append the variant to make it a unique cart entry
+            id: item.hasVariants ? `${item.id}_${variant}` : item.id,
+            name: item.hasVariants ? `${item.name} (${variant === 'hot' ? 'Hot' : 'Cold'})` : item.name,
+            variant: item.hasVariants ? variant : undefined,
+        };
+        addItem(cartItem);
+        toast.success(`${cartItem.name} added to cart!`, {
             style: {
                 borderRadius: '12px',
                 background: '#2C1810',
@@ -26,23 +35,36 @@ export default function MenuCard({ item }) {
                     {item.badge}
                 </span>
             )}
-            <div className={styles.imageWrapper}>
-                <img
-                    src={item.image || 'https://placehold.co/400x300/F5F0EB/8A7A6E?text=No+Image'}
-                    alt={item.name}
-                    className={styles.image}
-                    loading="lazy"
-                    onError={(e) => { e.target.src = 'https://placehold.co/400x300/F5F0EB/8A7A6E?text=No+Image'; }}
-                />
-            </div>
             <div className={styles.content}>
                 <div className={styles.topRow}>
-                    <h3 className={styles.name}>{item.name}</h3>
+                    <div className={styles.nameBlock}>
+                        <h3 className={styles.name}>{item.name}</h3>
+                        {item.description && (
+                            <p className={styles.description}>{item.description}</p>
+                        )}
+                    </div>
                     <span className={styles.price}>₹{item.price}</span>
                 </div>
-                {item.description && (
-                    <p className={styles.description}>{item.description}</p>
+
+                {item.hasVariants && (
+                    <div className={styles.variantToggle}>
+                        <button
+                            type="button"
+                            className={`${styles.variantBtn} ${variant === 'hot' ? styles.variantActive : ''}`}
+                            onClick={() => setVariant('hot')}
+                        >
+                            🔥 Hot
+                        </button>
+                        <button
+                            type="button"
+                            className={`${styles.variantBtn} ${variant === 'cold' ? styles.variantActive : ''}`}
+                            onClick={() => setVariant('cold')}
+                        >
+                            ❄️ Cold
+                        </button>
+                    </div>
                 )}
+
                 <button className={styles.addBtn} onClick={handleAdd} aria-label="Add to cart">
                     <FiPlus />
                 </button>

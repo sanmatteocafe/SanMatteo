@@ -1,12 +1,12 @@
 'use client';
 import { useEffect, useState } from 'react';
 import AdminLayout from '@/components/AdminLayout';
-import { getCategories, addCategory, deleteCategory } from '@/services/categoryService';
+import { getCategories, addCategory, deleteCategory, updateCategory } from '@/services/categoryService';
 import { getMenuItems } from '@/services/menuService';
 import toast from 'react-hot-toast';
 import {
     FiPlus, FiTrash2, FiSearch, FiLayers, FiCheckCircle,
-    FiEyeOff, FiTrendingUp, FiArrowRight, FiMoreVertical, FiFilter
+    FiEyeOff, FiTrendingUp, FiArrowRight, FiMoreVertical, FiFilter, FiEdit2, FiX
 } from 'react-icons/fi';
 import styles from './page.module.css';
 import Link from 'next/link';
@@ -21,6 +21,8 @@ export default function CategoriesPage() {
         description: '',
         displayOrder: 0
     });
+    const [editingCat, setEditingCat] = useState(null);
+    const [editForm, setEditForm] = useState({ name: '', description: '', displayOrder: 0 });
 
     useEffect(() => {
         const load = async () => {
@@ -66,6 +68,29 @@ export default function CategoriesPage() {
             toast.success('Category removed');
         } catch (e) {
             toast.error('Delete failed');
+        }
+    };
+
+    const openEdit = (cat) => {
+        setEditingCat(cat);
+        setEditForm({ name: cat.name, description: cat.description || '', displayOrder: cat.displayOrder || 0 });
+    };
+
+    const handleEdit = async () => {
+        if (!editingCat || !editForm.name.trim()) return;
+        try {
+            await updateCategory(editingCat.id, {
+                name: editForm.name.trim(),
+                description: editForm.description,
+                displayOrder: editForm.displayOrder,
+            });
+            setCategories(prev => prev.map(c =>
+                c.id === editingCat.id ? { ...c, ...editForm, name: editForm.name.trim() } : c
+            ));
+            toast.success('Category updated!');
+            setEditingCat(null);
+        } catch (e) {
+            toast.error('Failed to update category');
         }
     };
 
@@ -210,9 +235,14 @@ export default function CategoriesPage() {
                                 <div className={styles.itemCountBadge}>
                                     {getItemCount(cat.name)} Items
                                 </div>
-                                <button className={styles.moreBtn} onClick={() => handleDelete(cat.id)}>
-                                    <FiTrash2 size={14} color="#EF4444" />
-                                </button>
+                                <div className={styles.cardActions}>
+                                    <button className={styles.editBtn} onClick={() => openEdit(cat)}>
+                                        <FiEdit2 size={14} color="#D4A373" />
+                                    </button>
+                                    <button className={styles.moreBtn} onClick={() => handleDelete(cat.id)}>
+                                        <FiTrash2 size={14} color="#EF4444" />
+                                    </button>
+                                </div>
                             </div>
                             <div className={styles.cardInfo}>
                                 <h3>{cat.name}</h3>
@@ -233,6 +263,61 @@ export default function CategoriesPage() {
                         </div>
                     ))}
                 </div>
+
+                {/* Edit Category Modal */}
+                {editingCat && (
+                    <div className={styles.editOverlay} onClick={() => setEditingCat(null)}>
+                        <div className={styles.editModal} onClick={(e) => e.stopPropagation()}>
+                            <div className={styles.editModalHeader}>
+                                <h2>Edit Category</h2>
+                                <button className={styles.closeBtn} onClick={() => setEditingCat(null)}>
+                                    <FiX size={20} />
+                                </button>
+                            </div>
+
+                            <div className={styles.inputGroup}>
+                                <label>Category Name</label>
+                                <input
+                                    type="text"
+                                    className={styles.input}
+                                    value={editForm.name}
+                                    onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                                />
+                            </div>
+
+                            <div className={styles.inputGroup}>
+                                <label>Description</label>
+                                <input
+                                    type="text"
+                                    className={styles.input}
+                                    placeholder="Short description"
+                                    value={editForm.description}
+                                    onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
+                                />
+                            </div>
+
+                            <div className={styles.inputGroup}>
+                                <label>Display Order</label>
+                                <input
+                                    type="number"
+                                    className={styles.input}
+                                    min="0"
+                                    value={editForm.displayOrder}
+                                    onChange={(e) => setEditForm({ ...editForm, displayOrder: parseInt(e.target.value) || 0 })}
+                                />
+                            </div>
+
+                            <div className={styles.editModalActions}>
+                                <button className={styles.cancelBtn} onClick={() => setEditingCat(null)}>
+                                    Cancel
+                                </button>
+                                <button className={styles.saveBtn} onClick={handleEdit}>
+                                    <FiCheckCircle /> Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </AdminLayout>
     );

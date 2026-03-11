@@ -35,7 +35,7 @@ export default function CheckoutPage() {
         name: userProfile?.name || '',
         phone: userProfile?.phone || '',
         tableNumber: tableNumber || '',
-        paymentType: 'online',
+        paymentType: 'cash',
     });
 
     // Fetch tables from QR codes, active orders, and manual occupancy
@@ -54,15 +54,10 @@ export default function CheckoutPage() {
                     .sort((a, b) => a.number - b.number);
                 setAvailableTables(tables);
 
-                // Find occupied tables (orders with active status)
-                const activeStatuses = ['pending', 'preparing', 'ready'];
-                const occupied = new Set(
-                    allOrders
-                        .filter(o => activeStatuses.includes(o.status))
-                        .map(o => o.tableNumber)
-                );
+                // Find occupied tables - only from manual admin toggles
+                const occupied = new Set();
 
-                // Also include manually occupied tables from admin
+                // Only include manually occupied tables from admin
                 tablesData.forEach(t => {
                     if (t.manuallyOccupied) occupied.add(t.tableNumber);
                 });
@@ -203,7 +198,6 @@ export default function CheckoutPage() {
                                             <button
                                                 className={styles.qtyBtn}
                                                 onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                                disabled={item.quantity <= 1}
                                             >
                                                 <FiMinus />
                                             </button>
@@ -330,25 +324,10 @@ export default function CheckoutPage() {
                                 <h4 className={styles.paymentTitle}>Payment Method</h4>
                                 <div className={styles.paymentOptions}>
                                     <div
-                                        className={`${styles.paymentOption} ${form.paymentType === 'online' ? styles.selected : ''}`}
-                                        onClick={() => handlePaymentSelect('online')}
+                                        className={`${styles.paymentOption} ${styles.selected}`}
                                     >
                                         <div className={styles.radioCircle}>
-                                            {form.paymentType === 'online' && <div className={styles.radioInner} />}
-                                        </div>
-                                        <div className={styles.paymentMeta}>
-                                            <span className={styles.paymentName}>Online Payment</span>
-                                            <span className={styles.paymentDesc}>Apple Pay, Google Pay, Card</span>
-                                        </div>
-                                        <FiCreditCard className={styles.paymentIcon} />
-                                    </div>
-
-                                    <div
-                                        className={`${styles.paymentOption} ${form.paymentType === 'cash' ? styles.selected : ''}`}
-                                        onClick={() => handlePaymentSelect('cash')}
-                                    >
-                                        <div className={styles.radioCircle}>
-                                            {form.paymentType === 'cash' && <div className={styles.radioInner} />}
+                                            <div className={styles.radioInner} />
                                         </div>
                                         <div className={styles.paymentMeta}>
                                             <span className={styles.paymentName}>Cash at Counter</span>

@@ -1,6 +1,6 @@
 import { db } from '@/firebase/config';
 import {
-    collection, getDocs, addDoc, updateDoc, doc, query, orderBy, where, Timestamp, getDoc, onSnapshot
+    collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, orderBy, where, Timestamp, getDoc, onSnapshot
 } from 'firebase/firestore';
 
 const COLLECTION = 'orders';
@@ -142,4 +142,9 @@ export async function getOrderById(id) {
         ...data,
         createdAt: data.createdAt?.toDate?.() ? data.createdAt.toDate().toISOString() : data.createdAt,
     };
+}
+
+export async function deleteOrder(id) {
+    const ref = doc(db, COLLECTION, id);
+    return deleteDoc(ref);
 }

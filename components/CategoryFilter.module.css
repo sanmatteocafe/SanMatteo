@@ -55,3 +55,15 @@
 .pill.active .icon {
     opacity: 1;
 }
+
+@media (min-width: 768px) {
+    .wrapper {
+        overflow-x: visible;
+        padding-bottom: 0;
+    }
+
+    .pills {
+        flex-wrap: wrap;
+        white-space: normal;
+    }
+}

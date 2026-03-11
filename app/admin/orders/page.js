@@ -2,11 +2,12 @@
 import { useEffect, useState, useMemo } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import Modal from '@/components/Modal';
-import { updateOrderStatus, subscribeToOrdersByDateRange } from '@/services/orderService';
+import { updateOrderStatus, subscribeToOrdersByDateRange, deleteOrder } from '@/services/orderService';
+import { deleteBillByOrderId } from '@/services/billingService';
 import { getQRCodes } from '@/services/qrService';
 import { getTables, toggleTableOccupied } from '@/services/tableService';
 import toast from 'react-hot-toast';
-import { FiFilter, FiPrinter, FiDownload, FiUser, FiSmartphone, FiHash, FiCreditCard, FiCalendar } from 'react-icons/fi';
+import { FiFilter, FiPrinter, FiDownload, FiUser, FiSmartphone, FiHash, FiCreditCard, FiCalendar, FiTrash2 } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 
@@ -45,11 +46,11 @@ export default function OrdersPage() {
         fetchTables();
     }, []);
 
-    // Derive table occupancy from current orders + manual overrides
+    // Derive table occupancy from manual overrides only (not from orders)
     const tableStatuses = useMemo(() => {
         const activeStatuses = ['pending', 'preparing', 'ready'];
         const activeOrders = orders.filter(o => activeStatuses.includes(o.status));
-        // Map: tableNumber -> order
+        // Map: tableNumber -> order (for display only, not for occupancy)
         const occupiedMap = {};
         activeOrders.forEach(o => {
             if (!occupiedMap[o.tableNumber]) occupiedMap[o.tableNumber] = o;
@@ -59,8 +60,9 @@ export default function OrdersPage() {
             const isManual = !!manualOccupancy[t.number];
             return {
                 ...t,
-                status: (hasOrder || isManual) ? 'occupied' : 'available',
-                occupancySource: hasOrder ? 'order' : (isManual ? 'manual' : null),
+                status: isManual ? 'occupied' : 'available',
+                occupancySource: isManual ? 'manual' : null,
+                hasActiveOrder: hasOrder,
                 order: occupiedMap[t.number] || null,
             };
         });
@@ -133,6 +135,22 @@ export default function OrdersPage() {
         }
     };
 
+    const handleDeleteOrder = async (orderId, e) => {
+        e.stopPropagation();
+        if (!confirm('Are you sure you want to delete this order? This cannot be undone.')) return;
+        try {
+            await Promise.all([
+                deleteOrder(orderId),
+                deleteBillByOrderId(orderId)
+            ]);
+            setOrders(prev => prev.filter(o => o.id !== orderId));
+            if (selectedOrder?.id === orderId) setSelectedOrder(null);
+            toast.success('Order & billing record deleted');
+        } catch (e) {
+            toast.error('Failed to delete order');
+        }
+    };
+
     const handleToggleOccupied = async (tableNumber, e) => {
         e.stopPropagation();
         const currentlyManual = !!manualOccupancy[tableNumber];
@@ -179,7 +197,6 @@ export default function OrdersPage() {
                         <h3>Table Status</h3>
                         <div className={styles.tableStatusLegend}>
                             <span className={styles.legendItem}><span className={`${styles.legendDot} ${styles.available}`}></span> Available</span>
-                            <span className={styles.legendItem}><span className={`${styles.legendDot} ${styles.occupiedDot}`}></span> Occupied (Order)</span>
                             <span className={styles.legendItem}><span className={`${styles.legendDot} ${styles.manualDot}`}></span> Occupied (Manual)</span>
                         </div>
                     </div>
@@ -194,28 +211,21 @@ export default function OrdersPage() {
                                 <div className={styles.tableNum}>T{table.number}</div>
                                 <div className={styles.tableStatusLabel}>
                                     {table.status === 'occupied' ? (
-                                        table.occupancySource === 'order' ? (
-                                            <>
-                                                <span className={styles.occupiedBadge}>{table.order?.status}</span>
-                                                <span className={styles.tableOrderId}>#{table.order?.id?.slice(-4).toUpperCase()}</span>
-                                            </>
-                                        ) : (
-                                            <span className={styles.manualBadge}>Manual</span>
-                                        )
+                                        <span className={styles.manualBadge}>Occupied</span>
                                     ) : (
                                         <span className={styles.availableBadge}>Available</span>
                                     )}
+                                    {table.hasActiveOrder && (
+                                        <span className={styles.tableOrderId}>Order #{table.order?.id?.slice(-4).toUpperCase()}</span>
+                                    )}
                                 </div>
-                                {/* Toggle button - only show when no active order */}
-                                {!table.order && (
-                                    <button
-                                        className={`${styles.toggleBtn} ${manualOccupancy[table.number] ? styles.toggleBtnOccupied : ''}`}
-                                        onClick={(e) => handleToggleOccupied(table.number, e)}
-                                        title={manualOccupancy[table.number] ? 'Mark as Available' : 'Mark as Occupied'}
-                                    >
-                                        {manualOccupancy[table.number] ? 'Set Available' : 'Set Occupied'}
-                                    </button>
-                                )}
+                                <button
+                                    className={`${styles.toggleBtn} ${manualOccupancy[table.number] ? styles.toggleBtnOccupied : ''}`}
+                                    onClick={(e) => handleToggleOccupied(table.number, e)}
+                                    title={manualOccupancy[table.number] ? 'Mark as Available' : 'Mark as Occupied'}
+                                >
+                                    {manualOccupancy[table.number] ? 'Set Available' : 'Set Occupied'}
+                                </button>
                             </div>
                         ))}
                     </div>
@@ -310,16 +320,26 @@ export default function OrdersPage() {
                                             <td style={{ fontWeight: 800, color: '#D4A373' }}>₹{order.total}</td>
                                             <td><span className={`status-badge ${order.status}`}>{order.status}</span></td>
                                             <td onClick={(e) => e.stopPropagation()}>
-                                                {nextStatus ? (
+                                                <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                                                    {nextStatus ? (
+                                                        <button
+                                                            className={styles.actionBtn}
+                                                            onClick={() => handleStatusChange(order.id, nextStatus)}
+                                                        >
+                                                            → {nextStatus}
+                                                        </button>
+                                                    ) : (
+                                                        <span style={{ color: '#A89F94', fontSize: '12px' }}>Done</span>
+                                                    )}
                                                     <button
                                                         className={styles.actionBtn}
-                                                        onClick={() => handleStatusChange(order.id, nextStatus)}
+                                                        style={{ background: '#FEE2E2', color: '#EF4444', minWidth: 'auto', padding: '6px 8px' }}
+                                                        onClick={(e) => handleDeleteOrder(order.id, e)}
+                                                        title="Delete order"
                                                     >
-                                                        → {nextStatus}
+                                                        <FiTrash2 size={14} />
                                                     </button>
-                                                ) : (
-                                                    <span style={{ color: '#A89F94', fontSize: '12px' }}>Done</span>
-                                                )}
+                                                </div>
                                             </td>
                                         </tr>
                                     );

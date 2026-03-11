@@ -7,7 +7,7 @@ import {
     FiGrid, FiShoppingBag, FiBook, FiTag, FiFileText, FiBarChart2, FiLogOut, FiMenu, FiX, FiSmartphone, FiUsers, FiArrowLeft
 } from 'react-icons/fi';
 import { useState } from 'react';
-import ThemeToggle from '@/components/ThemeToggle';
+
 
 const navItems = [
     { href: '/admin/dashboard', label: 'Dashboard', icon: <FiGrid /> },
@@ -77,9 +77,7 @@ export default function Sidebar() {
                         <FiArrowLeft />
                         Back to Site
                     </Link>
-                    <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'center' }}>
-                        <ThemeToggle />
-                    </div>
+
                     <button
                         className="sidebar-nav-item"
                         onClick={handleLogout}

@@ -1,13 +1,13 @@
 import { db } from '@/firebase/config';
 import {
-    collection, getDocs, addDoc, deleteDoc, doc, query, orderBy, Timestamp
+    collection, getDocs, addDoc, deleteDoc, updateDoc, doc, query, orderBy, Timestamp
 } from 'firebase/firestore';
 
 const COLLECTION = 'categories';
 
 export async function getCategories() {
     // Order by displayOrder first, then name
-    const q = query(collection(db, COLLECTION), orderBy('name'));
+    const q = query(collection(db, COLLECTION), orderBy('displayOrder'));
     const snapshot = await getDocs(q);
     return snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
 }

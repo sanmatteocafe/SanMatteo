@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useCart } from '@/lib/CartContext';
 import { useAuth } from '@/lib/AuthContext';
 import { FiShoppingCart, FiMenu, FiX, FiHome, FiBook, FiShoppingBag, FiUser, FiLogOut, FiClock, FiSettings } from 'react-icons/fi';
-import ThemeToggle from '@/components/ThemeToggle';
+
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -106,11 +106,7 @@ export default function Navbar() {
                 </div>
 
                 <div className={styles.navRight}>
-                    <div className={styles.desktopOnly}>
-                        <ThemeToggle />
-                    </div>
 
-                    {/* Admin Panel Button - Desktop (only for admins) */}
                     {isAdmin && (
                         <Link href="/admin/dashboard" className={styles.adminBtn}>
                             <FiSettings />

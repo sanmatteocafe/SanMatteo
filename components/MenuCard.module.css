@@ -2,43 +2,25 @@
     background: #FFFFFF;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid #F1EBE5;
-    display: flex;
-    flex-direction: column;
+    position: relative;
 }
 
 .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-}
-
-.imageWrapper {
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: 1.2;
-}
-
-.image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-slow);
-}
-
-.card:hover .image {
-    transform: scale(1.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
 }
 
 .badge {
     position: absolute;
-    top: var(--space-4);
-    left: var(--space-4);
-    padding: 6px 12px;
+    top: var(--space-3);
+    left: var(--space-3);
+    padding: 4px 10px;
     background: #3D2B1F;
     color: white;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 800;
     border-radius: var(--radius-sm);
     text-transform: uppercase;
@@ -58,52 +40,103 @@
 
 .content {
     padding: var(--space-5);
-    flex: 1;
+    padding-right: 60px;
     display: flex;
     flex-direction: column;
+    gap: var(--space-2);
     position: relative;
+    min-height: 80px;
+    justify-content: center;
 }
 
 .topRow {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: var(--space-2);
+    gap: var(--space-4);
+}
+
+.nameBlock {
+    flex: 1;
+    min-width: 0;
 }
 
 .name {
-    font-size: var(--text-lg);
+    font-size: 16px;
     font-weight: 700;
     color: #3D2B1F;
     margin: 0;
-    line-height: 1.2;
-}
-
-.price {
-    font-size: var(--text-md);
-    font-weight: 700;
-    color: #3D2B1F;
+    line-height: 1.3;
 }
 
 .description {
-    font-size: 13px;
+    font-size: 12px;
     color: #8A7A6E;
-    line-height: 1.5;
-    margin-bottom: var(--space-4);
+    line-height: 1.4;
+    margin-top: 4px;
+    margin-bottom: 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
-    -webkit-box_orient: vertical;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-    margin-top: auto;
 }
 
+.price {
+    font-size: 15px;
+    font-weight: 800;
+    color: #D4A373;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* Hot / Cold variant toggle */
+.variantToggle {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.variantBtn {
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    border: 1px solid #E8E2DC;
+    background: #FDFCFB;
+    font-size: 12px;
+    font-weight: 600;
+    color: #8A7A6E;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.variantBtn:hover {
+    border-color: #D4A373;
+    color: #3D2B1F;
+}
+
+.variantActive {
+    background: #3D2B1F;
+    color: #FFFFFF;
+    border-color: #3D2B1F;
+}
+
+.variantActive:hover {
+    background: #2C1810;
+    color: #FFFFFF;
+    border-color: #2C1810;
+}
+
+/* Add to cart button */
 .addBtn {
     position: absolute;
-    bottom: var(--space-5);
-    right: var(--space-5);
-    width: 42px;
-    height: 42px;
+    right: var(--space-4);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     background: #3D2B1F;
     color: white;
@@ -113,14 +146,15 @@
     cursor: pointer;
     transition: all 0.2s ease;
     border: none;
-    box-shadow: 0 4px 10px rgba(61, 43, 31, 0.3);
+    box-shadow: 0 4px 10px rgba(61, 43, 31, 0.2);
+    flex-shrink: 0;
 }
 
 .addBtn:hover {
-    transform: scale(1.1) rotate(90deg);
+    transform: translateY(-50%) scale(1.1);
     background: #2C1810;
 }
 
 .addBtn svg {
-    font-size: 20px;
+    font-size: 18px;
 }

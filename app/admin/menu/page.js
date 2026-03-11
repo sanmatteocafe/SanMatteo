@@ -14,7 +14,7 @@ export default function AdminMenuPage() {
     const [categories, setCategories] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [editing, setEditing] = useState(null);
-    const [form, setForm] = useState({ name: '', price: '', category: '', image: '', description: '' });
+    const [form, setForm] = useState({ name: '', price: '', category: '', image: '', description: '', hasVariants: false });
     const [uploading, setUploading] = useState(false);
     const [imagePreview, setImagePreview] = useState('');
 
@@ -36,14 +36,14 @@ export default function AdminMenuPage() {
 
     const openAdd = () => {
         setEditing(null);
-        setForm({ name: '', price: '', category: categories[0] || '', image: '', description: '' });
+        setForm({ name: '', price: '', category: categories[0] || '', image: '', description: '', hasVariants: false });
         setImagePreview('');
         setShowModal(true);
     };
 
     const openEdit = (item) => {
         setEditing(item);
-        setForm({ name: item.name, price: item.price.toString(), category: item.category, image: item.image || '', description: item.description || '' });
+        setForm({ name: item.name, price: item.price.toString(), category: item.category, image: item.image || '', description: item.description || '', hasVariants: item.hasVariants || false });
         setImagePreview(item.image || '');
         setShowModal(true);
     };
@@ -241,6 +241,18 @@ export default function AdminMenuPage() {
                             <div className="admin-form-group">
                                 <label>Description</label>
                                 <textarea value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} placeholder="Short description" rows={3} />
+                            </div>
+                            <div className="admin-form-group">
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
+                                    <input
+                                        type="checkbox"
+                                        checked={form.hasVariants}
+                                        onChange={e => setForm({ ...form, hasVariants: e.target.checked })}
+                                        style={{ width: 18, height: 18, accentColor: '#D4A373' }}
+                                    />
+                                    <span>Has Hot / Cold option</span>
+                                </label>
+                                <small style={{ color: '#8A7A6E', marginTop: 4, display: 'block' }}>Enable this for items that can be served hot or cold (e.g. coffee, tea)</small>
                             </div>
                             <Button type="submit" variant="primary" fullWidth disabled={uploading}>
                                 {uploading ? 'Uploading...' : editing ? 'Update Item' : 'Add Item'}
